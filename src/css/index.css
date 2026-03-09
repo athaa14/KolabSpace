@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0a0f2e;
+    color: #e2e8f0;
+}
+
+/* Warna utama - biru gelap */
+.bg-primary-dark {
+    background-color: #0a0f2e;
+}
+
+.bg-primary-medium {
+    background-color: #11193a;
+}
+
+.bg-primary-light {
+    background-color: #1a2349;
+}
+
+/* Gradient untuk highlight */
+.blue-purple-gradient {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+.purple-blue-gradient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+}
+
+.blue-gradient {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+}
+
+.purple-gradient {
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+/* Warna teks */
+.text-accent-blue {
+    color: #60a5fa;
+}
+
+.text-accent-purple {
+    color: #a78bfa;
+}
+
+/* Efek khusus */
+.glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.feature-card {
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #11193a, #0a0f2e);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
+}
+
+.btn-glow {
+    transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+}
+
+/* Animasi */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0f2e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+}
+
+/* Section divider */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+    margin: 4rem 0;
+}
+
+/* Highlight text */
+.highlight-text {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Optimasi logo */
+img[alt="KolabSpace Logo"] {
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+img[alt="KolabSpace Logo"]:hover {
+    transform: scale(1.05);
+}
+
+/* Logo responsif */
+@media (max-width: 768px) {
+    img[alt="KolabSpace Logo"] {
+        height: 40px;
+    }
+}
+
+/* Gradient Variations */
+.blue-purple-gradient {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+.purple-blue-gradient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+}
+
+.blue-gradient {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+}
+
+.purple-gradient {
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+/* Hover Effects */
+.hover\:transform {
+    transition: transform 0.3s ease;
+}
+
+.hover\:-translate-y-2 {
+    transform: translateY(-8px);
+}
+
+/* Highlight Text */
+.highlight-text {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Button Glow Effect */
+.btn-glow {
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
