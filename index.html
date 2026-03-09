@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KolabSpace - Platform Kolaborasi Akademik</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS untuk tema gelap dengan biru dan ungu -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0f2e;
+            color: #e2e8f0;
+        }
+        
+        /* Warna utama - biru gelap */
+        .bg-primary-dark {
+            background-color: #0a0f2e;
+        }
+        
+        .bg-primary-medium {
+            background-color: #11193a;
+        }
+        
+        .bg-primary-light {
+            background-color: #1a2349;
+        }
+        
+        /* Gradient untuk highlight */
+        .blue-purple-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        
+        .purple-blue-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+        }
+        
+        .blue-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        
+        .purple-gradient {
+            background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+        }
+        
+        /* Warna teks */
+        .text-accent-blue {
+            color: #60a5fa;
+        }
+        
+        .text-accent-purple {
+            color: #a78bfa;
+        }
+        
+        /* Efek khusus */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #11193a, #0a0f2e);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
+        }
+        
+        .btn-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Animasi */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0f2e;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+        
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+            margin: 4rem 0;
+        }
+        
+        /* Highlight text */
+        .highlight-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Optimasi logo */
+        img[alt="KolabSpace Logo"] {
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        img[alt="KolabSpace Logo"]:hover {
+            transform: scale(1.05);
+        }
+
+        /* Logo responsif */
+        @media (max-width: 768px) {
+            img[alt="KolabSpace Logo"] {
+                height: 40px;
+            }
+        }
+
+        /* Gradient Variations */
+        .blue-purple-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+
+        .purple-blue-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+        }
+
+        .blue-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+
+        .purple-gradient {
+            background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+        }
+
+        /* Glass Card Effect */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        /* Hover Effects */
+        .hover\:transform {
+            transition: transform 0.3s ease;
+        }
+
+        .hover\:-translate-y-2 {
+            transform: translateY(-8px);
+        }
+
+        /* Highlight Text */
+        .highlight-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Button Glow Effect */
+        .btn-glow {
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 768px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-primary-dark">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-primary-medium/90 backdrop-blur-md border-b border-blue-900/30">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+             <div class="flex items-center space-x-3">
+            <!-- Logo untuk Desktop -->
+                <img src="images/logo-kolabspace1.png" alt="KolabSpace Logo" 
+                    class="hidden md:block h-12 w-auto">
+                
+                <!-- Logo untuk Mobile -->
+                <!-- <img src="logo-kolabspace.jpg" alt="KolabSpace Logo" 
+                    class="block md:hidden h-10 w-auto"> -->
+                
+                <!-- Text Logo -->
+                <h1 class="text-2xl font-bold">
+                <!-- <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    KolabSpace
+                </span> -->
+            </h1>
+
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-accent-blue font-medium transition-colors">Beranda</a>
+                <a href="#about" class="text-gray-300 hover:text-accent-blue font-medium transition-colors">Tentang</a>
+                <a href="#features" class="text-gray-300 hover:text-accent-blue font-medium transition-colors">Fitur</a>
+                <a href="#benefit" class="text-gray-300 hover:text-accent-blue font-medium transition-colors">Benefit</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <!-- <button class="px-5 py-2 text-accent-blue font-medium rounded-lg border border-blue-500/30 hover:bg-blue-900/30 transition">
+                    Masuk
+                </button>
+                <button class="px-6 py-2 blue-purple-gradient text-white font-bold rounded-lg btn-glow">
+                    Daftar
+                </button> -->
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-300">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-primary-medium border-t border-blue-900/30 px-4 py-3">
+            <a href="#home" class="block py-2 text-gray-300 hover:text-accent-blue transition">Beranda</a>
+            <a href="#about" class="block py-2 text-gray-300 hover:text-accent-blue transition">Tentang</a>
+            <a href="#features" class="block py-2 text-gray-300 hover:text-accent-blue transition">Fitur</a>
+            <a href="#benefit" class="block py-2 text-gray-300 hover:text-accent-blue transition">Benefit</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden py-20">
+        <!-- Background elements -->
+        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-600/10 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full filter blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        
+        <div class="container mx-auto px-4 py-12 md:py-24 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center justify-center mb-6 px-4 py-2 blue-gradient rounded-full">
+                    <span class="text-sm font-medium text-white">Platform Kolaborasi Akademik</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    <span class="text-white">Kolaborasi Tanpa Batas di</span>
+                    <br>
+                    <span class="highlight-text">KolabSpace</span>
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Platform kolaborasi akademik yang menghubungkan mahasiswa dan dosen lintas prodi dan lintas kampus dalam satu ruang digital.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16">
+                     <a href="login.html" 
+                        class="px-8 py-4 blue-purple-gradient text-white font-bold rounded-xl text-lg btn-glow flex items-center justify-center space-x-2 hover:no-underline transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                            <i class="fas fa-rocket"></i>
+                            <span>Login KolabSpace</span>
+                    </a>
+                    <!-- <button class="px-8 py-4 bg-primary-light border border-blue-500/30 text-white font-bold rounded-xl text-lg hover:bg-primary-medium transition flex items-center justify-center space-x-2">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Lihat Demo</span>
+                    </button> -->
+                </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-3xl font-bold text-accent-blue mb-2">50+</div>
+                        <div class="text-gray-400">Kampus Terhubung</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-3xl font-bold text-accent-purple mb-2">10K+</div>
+                        <div class="text-gray-400">Pengguna Aktif</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-3xl font-bold text-accent-blue mb-2">5K+</div>
+                        <div class="text-gray-400">Proyek Selesai</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-3xl font-bold text-accent-purple mb-2">200+</div>
+                        <div class="text-gray-400">Kolaborasi Aktif</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="section-divider"></div>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4 text-white">Apa itu <span class="highlight-text">KolabSpace</span>?</h2>
+                    <div class="h-1 w-24 blue-purple-gradient mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-8 md:p-12 mb-12">
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        <span class="font-bold text-accent-blue">KolabSpace</span> adalah platform yang dirancang khusus untuk mendukung kolaborasi akademik seperti proyek kelompok, riset, dan kegiatan organisasi kampus secara terstruktur dan terintegrasi.
+                    </p>
+                    
+                    <div class="p-6 rounded-xl border-l-4 blue-purple-gradient bg-gradient-to-r from-blue-900/20 to-purple-900/20 mb-10">
+                        <h3 class="text-2xl font-bold mb-4 text-white">Kenapa KolabSpace?</h3>
+                        <p class="text-gray-300">
+                            KolabSpace hadir untuk memecah batasan antar prodi dan kampus, menyediakan ruang digital yang memudahkan kolaborasi akademik, meningkatkan produktivitas, dan membangun jaringan yang lebih luas dalam komunitas akademik Indonesia.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center p-6 feature-card rounded-xl">
+                            <div class="w-20 h-20 blue-purple-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-university text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3 text-white">Lintas Kampus</h4>
+                            <p class="text-gray-400">Kolaborasi tanpa batas antar kampus dan wilayah geografis</p>
+                        </div>
+                        
+                        <div class="text-center p-6 feature-card rounded-xl">
+                            <div class="w-20 h-20 purple-blue-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3 text-white">Lintas Prodi</h4>
+                            <p class="text-gray-400">Gabungkan keahlian dari berbagai disiplin ilmu dan fakultas</p>
+                        </div>
+                        
+                        <div class="text-center p-6 feature-card rounded-xl">
+                            <div class="w-20 h-20 blue-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-users-cog text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3 text-white">Kolaborasi Terstruktur</h4>
+                            <p class="text-gray-400">Sistem terintegrasi untuk manajemen tim dan proyek yang efektif</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="section-divider"></div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-white">Fitur Utama <span class="highlight-text">KolabSpace</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Platform kami dilengkapi dengan berbagai fitur canggih untuk mendukung kolaborasi akademik yang efektif dan produktif.
+                </p>
+                <div class="h-1 w-24 blue-purple-gradient mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Fitur 1: Overview -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 blue-purple-gradient rounded-xl flex items-center justify-center mb-6 floating">
+                        <i class="fas fa-chart-pie text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Overview</h3>
+                    <p class="text-gray-400 mb-4">Dashboard ringkasan untuk melihat perkembangan semua proyek dan aktivitas kolaborasi dalam satu tampilan.</p>
+                    <div class="inline-flex items-center text-accent-blue font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 2: Project Hub -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 purple-blue-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 0.2s;">
+                        <i class="fas fa-project-diagram text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Project Hub</h3>
+                    <p class="text-gray-400 mb-4">Pusat pengelolaan semua proyek kolaborasi, dengan pembagian peran, file sharing, dan progress tracking.</p>
+                    <div class="inline-flex items-center text-accent-purple font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 3: Task & Timeline -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 blue-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 0.4s;">
+                        <i class="fas fa-tasks text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Task & Timeline</h3>
+                    <p class="text-gray-400 mb-4">Atur tugas, tenggat waktu, dan timeline proyek secara visual untuk memastikan semua tepat waktu.</p>
+                    <div class="inline-flex items-center text-accent-blue font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 4: Discussion Rooms -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 purple-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 0.6s;">
+                        <i class="fas fa-comments text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Discussion Rooms</h3>
+                    <p class="text-gray-400 mb-4">Ruang diskusi terpisah untuk setiap proyek atau topik dengan dukungan chat real-time dan forum.</p>
+                    <div class="inline-flex items-center text-accent-purple font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 5: Announcements -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 blue-purple-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 0.8s;">
+                        <i class="fas fa-bullhorn text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Announcements</h3>
+                    <p class="text-gray-400 mb-4">Sistem pengumuman terpusat untuk menyebarkan informasi penting ke semua anggota kolaborasi.</p>
+                    <div class="inline-flex items-center text-accent-blue font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 6: Collab Ledger -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 purple-blue-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 1s;">
+                        <i class="fas fa-book text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Collab Ledger</h3>
+                    <p class="text-gray-400 mb-4">Pencatatan kontribusi setiap anggota, pembagian tugas, dan catatan kolaborasi yang terstruktur.</p>
+                    <div class="inline-flex items-center text-accent-purple font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 7: Analytics -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 blue-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 1.2s;">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Analytics</h3>
+                    <p class="text-gray-400 mb-4">Analisis data kolaborasi, produktivitas tim, dan insight untuk meningkatkan efektivitas kerja sama.</p>
+                    <div class="inline-flex items-center text-accent-blue font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 8: Portfolio Builder -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 purple-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 1.4s;">
+                        <i class="fas fa-briefcase text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Portfolio Builder</h3>
+                    <p class="text-gray-400 mb-4">Alat untuk membuat portofolio dari hasil kolaborasi dan proyek akademik yang telah diselesaikan.</p>
+                    <div class="inline-flex items-center text-accent-purple font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Fitur 9: Promo Tools -->
+                <div class="feature-card rounded-xl p-7">
+                    <div class="w-16 h-16 blue-purple-gradient rounded-xl flex items-center justify-center mb-6 floating" style="animation-delay: 1.6s;">
+                        <i class="fas fa-megaphone text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Promo Tools</h3>
+                    <p class="text-gray-400 mb-4">Alat promosi untuk menyebarkan informasi tentang proyek atau acara kampus kepada komunitas yang lebih luas.</p>
+                    <div class="inline-flex items-center text-accent-blue font-medium">
+                        <span>Pelajari lebih lanjut</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="section-divider"></div>
+
+    <!-- Benefit Section -->
+    <section id="benefit" class="py-20">
+        <div class="container mx-auto px-4">
+            <!-- Background elements -->
+            <div class="absolute left-1/4 top-1/2 w-64 h-64 bg-blue-600/10 rounded-full filter blur-3xl"></div>
+            <div class="absolute right-1/4 bottom-1/2 w-80 h-80 bg-purple-600/10 rounded-full filter blur-3xl"></div>
+            
+            <div class="relative z-10 max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+                        <span class="highlight-text">Benefit</span> Menggunakan KolabSpace
+                    </h2>
+                    <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                        Temukan semua keuntungan yang akan Anda dapatkan dengan menggunakan platform kolaborasi akademik terbaik di Indonesia.
+                    </p>
+                    <div class="h-1 w-24 blue-purple-gradient mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <!-- Benefit 1 -->
+                    <div class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-16 h-16 blue-purple-gradient rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-bolt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Efisiensi Waktu</h3>
+                        <p class="text-gray-300 text-center">
+                            Hemat waktu dengan manajemen proyek terpusat, diskusi real-time, dan koordinasi tim yang lebih efektif.
+                        </p>
+                        <ul class="mt-6 space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Kolaborasi lintas zona waktu</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Automated task management</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Integrasi dengan tools akademik</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefit 2 -->
+                    <div class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-16 h-16 purple-blue-gradient rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Produktivitas Meningkat</h3>
+                        <p class="text-gray-300 text-center">
+                            Tingkatkan produktivitas hingga 40% dengan tools kolaborasi yang dirancang khusus untuk kebutuhan akademik.
+                        </p>
+                        <ul class="mt-6 space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Progress tracking real-time</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Analytics performa tim</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Smart deadline reminders</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefit 3 -->
+                    <div class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-16 h-16 blue-gradient rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Kolaborasi Optimal</h3>
+                        <p class="text-gray-300 text-center">
+                            Bangun jaringan akademik yang luas dengan kolaborasi lintas prodi, fakultas, bahkan universitas.
+                        </p>
+                        <ul class="mt-6 space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Connections dengan expert</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Multidisciplinary projects</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Peer-to-peer learning</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefit 4 -->
+                    <div class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-16 h-16 purple-gradient rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Keamanan Data</h3>
+                        <p class="text-gray-300 text-center">
+                            Data penelitian dan akademik Anda terlindungi dengan sistem keamanan tingkat enterprise.
+                        </p>
+                        <ul class="mt-6 space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>End-to-end encryption</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Regular security audits</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>GDPR compliant</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefit 5 -->
+                    <div class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-16 h-16 blue-purple-gradient rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Portfolio Builder</h3>
+                        <p class="text-gray-300 text-center">
+                            Kumpulkan semua karya akademik dalam portfolio digital yang siap untuk karir atau studi lanjut.
+                        </p>
+                        <ul class="mt-6 space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Digital certificate system</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Export portfolio ke PDF</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Share dengan 1 click</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefit 6 -->
+                    <div class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-16 h-16 purple-blue-gradient rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-headset text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 text-center">Dukungan Lengkap</h3>
+                        <p class="text-gray-300 text-center">
+                            Dapatkan bantuan kapan saja dari tim support kami yang berpengalaman di bidang akademik.
+                        </p>
+                        <ul class="mt-6 space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>24/7 customer support</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Academic consultants</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                <span>Regular training sessions</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- CTA Bottom -->
+                <div class="text-center mt-16">
+                    <h3 class="text-3xl font-bold text-white mb-6">
+                        Bergabung dengan <span class="highlight-text">10,000+</span> Akademisi Terkemuka
+                    </h3>
+                    <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        Mulai perjalanan kolaborasi akademik Anda hari ini dan rasakan semua benefit yang ditawarkan KolabSpace.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-6">
+                        <button class="px-10 py-5 blue-purple-gradient text-white font-bold rounded-xl text-lg btn-glow flex items-center justify-center space-x-3 hover:transform hover:-translate-y-1 transition-all duration-300">
+                            <i class="fas fa-rocket text-xl"></i>
+                            <span class="text-lg">Mulai Sekarang Gratis</span>
+                        </button>
+                        <!-- <button class="px-10 py-5 bg-primary-light border border-blue-500/30 text-white font-bold rounded-xl text-lg hover:bg-primary-medium transition flex items-center justify-center space-x-3 hover:transform hover:-translate-y-1 transition-all duration-300">
+                            <i class="fas fa-play-circle text-xl"></i>
+                            <span class="text-lg">Lihat Demo Lengkap</span>
+                        </button> -->
+                    </div>
+                    
+                    <div class="mt-12 glass-card p-6 rounded-xl inline-flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                                <i class="fas fa-university text-green-400"></i>
+                            </div>
+                            <span class="text-gray-300"><span class="font-bold text-white">50+</span> Kampus</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center mr-3">
+                                <i class="fas fa-user-graduate text-blue-400"></i>
+                            </div>
+                            <span class="text-gray-300"><span class="font-bold text-white">10,000+</span> Pengguna</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-3">
+                                <i class="fas fa-project-diagram text-purple-400"></i>
+                            </div>
+                            <span class="text-gray-300"><span class="font-bold text-white">5,000+</span> Proyek</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-primary-medium border-t border-blue-900/30">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start mb-12">
+                <div class="mb-10 md:mb-0 md:w-2/5">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl blue-purple-gradient flex items-center justify-center shadow-lg">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold text-white">
+                            <span class="text-accent-blue">Kolab</span><span class="text-accent-purple">Space</span>
+                        </h1>
+                    </div>
+                    <p class="text-gray-400 mb-8 max-w-md">
+                        Platform kolaborasi akademik terkemuka di Indonesia, menghubungkan mahasiswa dan dosen lintas prodi dan kampus dalam satu ekosistem digital.
+                    </p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center border border-blue-500/20 hover:blue-purple-gradient transition">
+                            <i class="fab fa-twitter text-gray-400 hover:text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center border border-blue-500/20 hover:blue-purple-gradient transition">
+                            <i class="fab fa-instagram text-gray-400 hover:text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center border border-blue-500/20 hover:blue-purple-gradient transition">
+                            <i class="fab fa-linkedin-in text-gray-400 hover:text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center border border-blue-500/20 hover:blue-purple-gradient transition">
+                            <i class="fab fa-youtube text-gray-400 hover:text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-10 md:w-3/5">
+                    <div>
+                        <h3 class="text-lg font-bold mb-6 text-white">Platform</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#features" class="text-gray-400 hover:text-accent-blue transition">Fitur</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Harga</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">Kasus Penggunaan</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent-blue transition">API</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold mb-6 text-white">Perusahaan</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#about" class="text-gray-400 hover:text-accent-purple transition">Tentang Kami</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent-purple transition">Blog</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent-purple transition">Karier</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent-purple transition">Mitra</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold mb-6 text-white">Hubungi Kami</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-envelope mt-1 mr-3 text-accent-blue"></i>
+                                <span class="text-gray-400">info@kolabspace.id</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-phone mt-1 mr-3 text-accent-purple"></i>
+                                <span class="text-gray-400">+62 21 1234 5678</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-3 text-accent-blue"></i>
+                                <span class="text-gray-400">Jakarta, Indonesia</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-900/30 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2023 KolabSpace. Hak Cipta Dilindungi.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Kebijakan Privasi</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Syarat Layanan</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm">Peta Situs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+        
+        // Add animation to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Add fade-in animation class
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .animate-fadeIn {
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
